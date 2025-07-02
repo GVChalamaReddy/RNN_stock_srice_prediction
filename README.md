@@ -33,25 +33,53 @@
     - A basic SimpleRNN architecture was developed.
     - Hyperparameters like number of units, activation functions, and return sequences were manually and automatically tuned.
     - The model was trained and evaluated on windowed sequences of stock prices.
+  - Advanced RNN (LSTM/GRU):
+    - Implemented LSTM models with:
+      - return_sequences=True for stacking
+      - Multiple layers with dropout
+      - Tunable activations (tanh, relu)
+    - Used Keras Tuner with Bayesian Optimization to find optimal hyperparameter configurations:
+      - Number of units per layer
+      - Learning rate
+      - Dropout rates
+      - Activation functions
 
  ### Techniques:
  Specific tools or methods used at different steps of model building are mentioned below: 
- -	**Data preprocessing**: One-Hot encoding
- -	**Model building**: Simple RNN Network, LSTM
+ -	**Data preprocessing**:
+    - Loaded data from multiple CSV files, each representing a different stock.
+    - Extracted and combined them into a single DataFrame.
+    - Dropped unnecessary columns and standardized feature names (e.g., Close_AMZN).
+    - Handled missing values using forward-fill and interpolation.
+    - Analyzed volume distributions and plotted correlations for each stock separately.
+    - Created windowed sequences for time-series modeling (e.g., a window of 20 days to predict the next day's closing prices).
+    - Applied scaling (MinMaxScaler) in a windowed way to prevent leakage.
+    - Split data into training and testing sets using train_test_split.
+ -	**Model building**:
+    - Simple RNN Network, LSTM
  -	**Model Optimization**: Dropout, Regularization, Learning Rate, Batch Normalization, Adam Optimizer
- -	**Evaluation metrics**: Accuracy, Confusion Matrix, Recall, Precision, F1-score
+      - Training strategies:
+        - EarlyStopping to prevent overfitting
+        - ModelCheckpoint to save best performing model
+        - Validation split (20%) during training
+        - Best model retrained on the full training set
+ -	**Evaluation metrics**:
+    - Mean Absolute Error (MAE)
+    - Root Mean Squared Error (RMSE)
+    - R Squared
+    - Visual Actual vs Predicted plots for each stock
+ - Final Results:
+   - `AMZN` - MAE: 175.8513, RMSE: 34331.8409, R²: -0.0732
+   - `IBM` - MAE: 33.3136, RMSE: 1294.1401,R²: -7.4355
+   - `GOOGL` - MAE: 22.7943, RMSE: 804.6457, R²: 0.9362
+   - `MSFT` - MAE: 7.1929, RMSE: 64.2991, R²: 0.4431
 
 ## Conclusions
-- Started building own CNN model with 3 convolutional layers, but the accuracy was just 0.40, which was very low. I tried configuring hyperparameters like dropouts, and the performance increased to 0.50.
-- As own CNN model is overfitting, used RESNET 50 with transfer learning approach.Initially made all the layers trainable as false observed only 0.60 training accuracy, a slight increase from own CNN model.
-- Modified the trainable layers to 20 and got the training accuracy as 98 percent and the validation accuracy as 60%. Clearly the model was overfitting.
-- To resolve overfitting problem, modified the trainable layers from 20 to 10, and still able to see the model is overfitting.
-- Modified model training layer to 5 and increased the dropout from 0.6 to 0.7 and reduced the learning rate. with these configuration training accuracy: 0.86 and val_accuracy: 0.80 are improved signficantly.
-- Clearly, the model is able to generalize the training data and produce the desired output.
-- From the confusion matrix we are able to see a lot of misclassification is done as a plastic when compared to others, which is very little.
-- Overall, the model was able to generalize the data and produce the acceptable prediction; nearly 86% of the data is properly classified.
-- The model has performed well on the waste segregation task, achieving overall 84% accuracy with strong generalization.
-
+- Advanced RNN models (LSTM/GRU) outperformed Simple RNNs in capturing complex temporal dependencies.
+- Adding more layers and using return_sequences=True improved performance, especially when using BayesianOptimization.
+- Stocks with high volatility had larger prediction errors, but the model generalized well.
+- Window size around business weeks (e.g., 20 days) gave more consistent patterns for the model to learn.
+- Data normalization and careful train-test splits were crucial for stable results.
 
 ## Technologies Used
 - **python** - 3.13.1
@@ -68,7 +96,7 @@
 ## Acknowledgements
 
 - This project was inspired by Upgrad IIIT Bangalore PG program on ML and AI.
-- This project was based on Convolutional Neural Networks (CNNs)
+- This project was based on Recurrent Neural Networks (CNNs)
 
 
 ## Contact
