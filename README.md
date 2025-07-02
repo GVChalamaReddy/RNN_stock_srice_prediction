@@ -29,11 +29,11 @@
 
   ### Approach:
   To predict closing prices of multiple stocks ('AMZN', 'IBM', 'GOOGL', MSFT') using sequential neural network models (Simple RNN and Advanced RNN like LSTM/GRU), with careful preprocessing, optimization, and evaluation.
-  - Simple RNN:
+  - **Simple RNN**:
     - A basic SimpleRNN architecture was developed.
     - Hyperparameters like number of units, activation functions, and return sequences were manually and automatically tuned.
     - The model was trained and evaluated on windowed sequences of stock prices.
-  - Advanced RNN (LSTM/GRU):
+  - **Advanced RNN (LSTM/GRU)**:
     - Implemented LSTM models with:
       - return_sequences=True for stacking
       - Multiple layers with dropout
