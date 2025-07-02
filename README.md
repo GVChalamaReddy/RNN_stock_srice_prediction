@@ -28,11 +28,11 @@
   - `Name`: This column gives the official name of the stock as used in the stock market.
 
   ### Approach:
-  - All the images were the size of 256×256. Resize of images is done without loosing the data, inorder to reduce the compute memory issue .
-  - All the images have 3 channels as RGB.
-  - The data has seven categories. Cardboard, Food Waste, Glass, Metal, Other, Paper, Plastic
-  - Class distribution was imbalanced. There was a greater number of images in the plastic category.
-  - Since there was no equal number of images present in each category, the test and train split was done with stratify=y with an 80/20 ratio.
+  To predict closing prices of multiple stocks ('AMZN', 'IBM', 'GOOGL', MSFT') using sequential neural network models (Simple RNN and Advanced RNN like LSTM/GRU), with careful preprocessing, optimization, and evaluation.
+  - Simple RNN:
+    - A basic SimpleRNN architecture was developed.
+    - Hyperparameters like number of units, activation functions, and return sequences were manually and automatically tuned.
+    - The model was trained and evaluated on windowed sequences of stock prices.
 
  ### Techniques:
  Specific tools or methods used at different steps of model building are mentioned below: 
